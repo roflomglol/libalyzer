@@ -8,6 +8,7 @@ gem 'rake'
 gem 'pg'
 
 group :development do
+  gem 'racksh'
   gem 'pry-byebug'
 end
 
