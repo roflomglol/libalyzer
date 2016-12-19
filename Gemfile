@@ -6,6 +6,7 @@ gem 'unicorn'
 gem 'activerecord', require: 'active_record'
 gem 'rake'
 gem 'pg'
+gem 'slim'
 
 group :development do
   gem 'racksh'
