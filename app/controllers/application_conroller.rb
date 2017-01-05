@@ -1,7 +1,27 @@
 module Libalyzer
   class ApplicationController < Sinatra::Base
-    set :root,  ENV['SINATRA_ROOT']
-    set :views, Proc.new { File.join(root, 'app', 'views') }
+    register Sinatra::Sprockets::Helpers
+
+    set :root,           ENV['SINATRA_ROOT']
+    set :views,          File.join(root, 'app', 'views')
+    set :sprockets,      Sprockets::Environment.new(root)
+    set :digest_assets,  true
+    set :assets_prefix,  '/assets'
+
+    configure do
+      sprockets.append_path File.join(root, 'app', 'assets', 'stylesheets')
+      sprockets.append_path File.join(root, 'app', 'assets', 'javascripts')
+      sprockets.append_path File.join(root, 'app', 'assets', 'images')
+
+      configure_sprockets_helpers do |helpers|
+        helpers.environment = settings.sprockets
+      end
+    end
+
+    get '/assets/*' do
+      env['PATH_INFO'].sub!('/assets', '')
+      settings.sprockets.call(env)
+    end
 
     get '/' do
       slim :'reports/new', layout: :'layouts/application'

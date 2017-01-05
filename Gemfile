@@ -7,6 +7,8 @@ gem 'activerecord', require: 'active_record'
 gem 'rake'
 gem 'pg'
 gem 'slim'
+gem 'sprockets'
+gem 'sprockets-helpers', require: 'sinatra/sprockets-helpers'
 
 group :development do
   gem 'racksh'
