@@ -29,6 +29,7 @@ module Libalyzer
 
     get '/reports/:id' do
       @report = Report.find(params[:id])
+      @report_as_data_attribute = @report.body.map { |k, v| { axis: k, value: v } }.to_json
 
       slim :'reports/show', layout: :'layouts/application'
     end
