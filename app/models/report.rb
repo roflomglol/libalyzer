@@ -15,7 +15,6 @@ class Report < ApplicationRecord
   ).freeze
 
   def base_genres_as_json
-    # base_genres.map { |k, v| { axis: k, value: v } }.to_json
     BASE_GENRES.map do |genre_name|
       { axis: genre_name, value: body[genre_name.to_s] || 0 }
     end.to_json
